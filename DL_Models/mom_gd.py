@@ -26,17 +26,26 @@ def grad_w(x, w, b, y):
     return (fx - y) * fx * (1 - fx) * x
 
 
-def do_gradient_descent():
-    w, b, eta, max_epochs = -2, -2, 1.0, 1000
-    epochs, errors = [], []
+
+def do_mombgd():
+    max_epochs = 1000
+    errors, epochs = [], []
+
+    w, b, eta = -2, -2, 1.0
+    prev_uw, prev_ub, beta = 0, 0, 0.9
+
     for i in range(max_epochs):
         dw, db = 0, 0
         for x, y in zip(X, Y):
-            dw += grad_w(x, w, b, y)
-            db += grad_b(x, w, b, y)
+            dw += grad_w(w, b, x, y)
+            db += grad_b(w, b, x, y)
 
-        w = w - eta * dw
-        b = b - eta * db
+        uw = beta * prev_uw + eta * dw
+        ub = beta * prev_ub + eta * db
+        w = w - uw
+        b = b - ub
+        prev_uw = uw
+        prev_ub = ub
 
         current_error = error(w, b)
         errors.append(current_error)
@@ -51,12 +60,14 @@ def do_gradient_descent():
             plt.legend()
             plt.show()
 
-    # Plot error vs epochs after gradient descent
+        # Plot error vs epochs after gradient descent
     plt.plot(epochs, errors)
     plt.title('Error over epochs')
     plt.xlabel('Epochs')
     plt.ylabel('Error')
     plt.show()
 
+
 if __name__ == "__main__":
-    do_gradient_descent()
+    do_mombgd()
+
