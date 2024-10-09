@@ -26,40 +26,39 @@ def grad_w(x, w, b, y):
     return (fx - y) * fx * (1 - fx) * x
 
 
-def do_mombgd():
-    max_epochs = 1000
+def do_ngd():
+    max_epoch = 1000
     errors, epochs = [], []
 
     w, b, eta = -2, -2, 1.0
-    prev_uw, prev_ub, beta = 0, 0, 0.9
+    prev_vw, prev_vb, beta = 0, 0, 0.9
 
-    for i in range(max_epochs):
+    for i in range(max_epoch):
         dw, db = 0, 0
+        v_w = beta * prev_vw
+        v_b = beta * prev_vb
         for x, y in zip(X, Y):
-            dw += grad_w(w, b, x, y)
-            db += grad_b(w, b, x, y)
-
-        uw = beta * prev_uw + eta * dw
-        ub = beta * prev_ub + eta * db
-        w = w - uw
-        b = b - ub
-        prev_uw = uw
-        prev_ub = ub
+            dw += grad_w(w - v_w, b - v_b, x, y)
+            db += grad_b(w - v_w, b - v_b, x, y)
+        vw = beta * prev_vw + eta * dw
+        vb = beta * prev_vb + eta * db
+        w = w - vw
+        b = b - vb
+        prev_vw = vw
+        prev_vb = vb
 
         current_error = error(w, b)
         errors.append(current_error)
         epochs.append(i)
 
-        # Plot the true Y values and predicted Y values
-        if i % 100 == 0:  # Plot every 100th epoch for clarity
+        if i % 100 == 0:
             Y_pred = [f(x, w, b) for x in X]
-            plt.plot(X, Y, 'ro', label='True Y')  # True Y values
-            plt.plot(X, Y_pred, 'b-', label='Predicted Y')  # Predicted Y values
+            plt.plot(X, Y, 'ro', label='True Y')
+            plt.plot(X, Y_pred, 'b-', label='Predicted Y')
             plt.title(f'Epoch {i}')
             plt.legend()
             plt.show()
 
-        # Plot error vs epochs after gradient descent
     plt.plot(epochs, errors)
     plt.title('Error over epochs')
     plt.xlabel('Epochs')
@@ -68,5 +67,4 @@ def do_mombgd():
 
 
 if __name__ == "__main__":
-    do_mombgd()
-
+    do_ngd()
