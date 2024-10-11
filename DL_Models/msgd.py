@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 X = [0.5, 1.0, 2.5]
-Y = [0.2, 0.84, 0.9]
+Y = [0.2, 0.84, 0.99]
 
 
 def f(x, w, b):
@@ -57,7 +57,7 @@ def do_msgd():
             plt.show()
 
             plt.plot(epochs, errors)
-            plt.title('Error over epochs')
+            plt.title('Error over epochs_msgd')
             plt.xlabel('Epochs')
             plt.ylabel('Error')
             plt.show()
