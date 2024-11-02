@@ -6,7 +6,7 @@ Y = [0.2, 0.84, 0.99]
 
 
 def f(x, w, b):
-    return 1 /(1+np.exp(-(w*x + b)))
+    return 1 / (1+np.exp(-(w*x + b)))
 
 
 def error(w, b):
