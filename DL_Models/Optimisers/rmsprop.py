@@ -38,8 +38,8 @@ def do_rmsprop():
     for i in range(max_epochs):
         dw, db = 0, 0
         for x, y in zip(X, Y):
-            dw = grad_w(x, y, w, b)
-            db = grad_b(x, y, w, b)
+            dw += grad_w(x, y, w, b)
+            db += grad_b(x, y, w, b)
         uw = beta * uw + (1 - beta) * dw ** 2
         ub = beta * ub + (1 - beta) * db ** 2
         w = w - eta * dw/ (np.sqrt(uw) + eps)

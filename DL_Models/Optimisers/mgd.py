@@ -50,16 +50,14 @@ def do_mombgd():
         errors.append(current_error)
         epochs.append(i)
 
-        # Plot the true Y values and predicted Y values
-        if i % 100 == 0:  # Plot every 100th epoch for clarity
+        if i % 100 == 0:
             Y_pred = [f(x, w, b) for x in X]
-            plt.plot(X, Y, 'ro', label='True Y')  # True Y values
-            plt.plot(X, Y_pred, 'b-', label='Predicted Y')  # Predicted Y values
+            plt.plot(X, Y, 'ro', label='True Y')
+            plt.plot(X, Y_pred, 'b-', label='Predicted Y')
             plt.title(f'Epoch {i}')
             plt.legend()
             plt.show()
 
-        # Plot error vs epochs after gradient descent
     plt.plot(epochs, errors)
     plt.title('Error over epochs')
     plt.xlabel('Epochs')

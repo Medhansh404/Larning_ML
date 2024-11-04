@@ -35,8 +35,8 @@ def do_adam():
     for epoch in range(max_epochs):
         dw, db = 0, 0
         for (x, y) in zip(X, Y):
-            dw = grad_w(x, y, w, b)
-            db = grad_b(x, y, w, b)
+            dw += grad_w(x, y, w, b)
+            db += grad_b(x, y, w, b)
 
         mt_w = beta1 * prev_mt_w + (1 - beta1) * dw
         mt_b = beta1 * prev_mt_b + (1-beta1) * db
