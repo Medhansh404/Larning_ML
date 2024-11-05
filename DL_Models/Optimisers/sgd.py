@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 X = [0.5, 1.0,  2.5]
 Y = [0.2, 0.84, 0.9]
 
