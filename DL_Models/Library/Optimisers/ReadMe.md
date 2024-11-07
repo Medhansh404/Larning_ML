@@ -16,8 +16,8 @@ results
 
 
 # Thinking about the design approach: 2 options like pytorch, another is to make a simple approach
-1). Pytorch : 
-        pros : well, it is apparently the right way easily maintainable and gives structure, object-oriented
+1). Pytorch: 
+        pros: well, it is apparently the right way easily maintainable and gives structure, object-oriented
         cons: should know a lot before running a simple thing, complicated code, end up thinking about design and code nothing
 2). Simple:
         pros: simple and does the job on simple stuff
