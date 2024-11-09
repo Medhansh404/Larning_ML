@@ -28,6 +28,14 @@ def grad_w(x, w, b, y):
     return (fx - y) * fx * (1 - fx) * x
 
 
+def display(epochs, errors):
+    plt.plot(epochs, errors)
+    plt.title('Error over epochs')
+    plt.xlabel('Epochs')
+    plt.ylabel('Error')
+    plt.show()
+
+
 def do_gradient_descent():
     w, b, eta, max_epochs = -2, -2, 1.0, 1000
     epochs, errors = [], []
@@ -54,11 +62,7 @@ def do_gradient_descent():
             plt.show()
 
     # Plot error vs epochs after gradient descent
-    plt.plot(epochs, errors)
-    plt.title('Error over epochs')
-    plt.xlabel('Epochs')
-    plt.ylabel('Error')
-    plt.show()
+    display(epochs, errors)
 
 if __name__ == "__main__":
     do_gradient_descent()
